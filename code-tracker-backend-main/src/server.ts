@@ -1,5 +1,4 @@
 import express from 'express';
-import mongoose from 'mongoose';
 import cors from 'cors';
 import dotenv from 'dotenv';
 import userRoutes from './routes/userRoutes';
@@ -57,42 +56,10 @@ app.get('/health', (req, res) => {
   res.json({ status: 'ok', timestamp: new Date().toISOString() });
 });
 
-// MongoDB connection with better error handling
-console.log('Attempting to connect to MongoDB with URI:', process.env.MONGODB_URI?.replace(/\/\/([^:]+):([^@]+)@/, '//<username>:<password>@'));
-
-mongoose.connect(process.env.MONGODB_URI || 'mongodb://localhost:27017/codeforces_tracker')
-  .then(() => {
-    console.log('Connected to MongoDB successfully');
-    console.log('Database connection state:', mongoose.connection.readyState);
-    console.log('Database name:', mongoose.connection.name);
-    
-    // Only start the server after successful database connection
-    app.listen(PORT, () => {
-      console.log(`Server is running on port ${PORT}`);
-      console.log(`Visit http://localhost:${PORT}/api/visitors/stats to check visitor stats`);
-    });
-  })
-  .catch(err => {
-    console.error('MongoDB connection error details:', {
-      name: err.name,
-      message: err.message,
-      code: err.code,
-      codeName: err.codeName
-    });
-    process.exit(1);
-  });
-
-// Add error handler for MongoDB connection
-mongoose.connection.on('error', (err) => {
-  console.error('MongoDB connection error after initial connection:', err);
-});
-
-mongoose.connection.on('disconnected', () => {
-  console.log('MongoDB disconnected');
-});
-
-mongoose.connection.on('reconnected', () => {
-  console.log('MongoDB reconnected');
+// Remove MongoDB connection and event handlers
+// Start the Express server directly
+app.listen(PORT, () => {
+  console.log(`Server is running on port ${PORT}`);
 });
 
 // Basic error handling middleware
