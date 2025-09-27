@@ -1,10 +1,21 @@
 import express from 'express';
 import cors from 'cors';
 import dotenv from 'dotenv';
+import mongoose from 'mongoose';
 import userRoutes from './routes/userRoutes';
 import visitorRoutes from './routes/visitorRoutes';
 
 dotenv.config();
+
+const MONGODB_URI = process.env.MONGODB_URI || 'mongodb://localhost:27017/trackmycode';
+
+mongoose.connect(MONGODB_URI)
+  .then(() => {
+    console.log('Connected to MongoDB');
+  })
+  .catch((error) => {
+    console.error('MongoDB connection error:', error);
+  });
 
 const app = express();
 const PORT = process.env.PORT || 3000;
@@ -56,13 +67,9 @@ app.get('/health', (req, res) => {
   res.json({ status: 'ok', timestamp: new Date().toISOString() });
 });
 
-// Remove MongoDB connection and event handlers
-// Start the Express server directly
 app.listen(PORT, () => {
   console.log(`Server is running on port ${PORT}`);
 });
-
-// Basic error handling middleware
 app.use((err: Error, req: express.Request, res: express.Response, next: express.NextFunction) => {
   console.error('Server error:', err);
   res.status(500).json({ error: 'Internal server error', message: err.message });

@@ -1,0 +1,19 @@
+{
+  "name": "track-my-code",
+  "version": "1.0.0",
+  "description": "Code tracking application with frontend and backend",
+  "scripts": {
+    "install-all": "npm install && cd code-tracker-backend-main && npm install && cd ../code-tracker-frontend-main && npm install",
+    "dev": "concurrently \"npm run dev:backend\" \"npm run dev:frontend\"",
+    "dev:backend": "cd code-tracker-backend-main && npm run dev",
+    "dev:frontend": "cd code-tracker-frontend-main && npm run dev",
+    "build": "cd code-tracker-backend-main && npm run build && cd ../code-tracker-frontend-main && npm run build",
+    "start": "cd code-tracker-backend-main && npm start"
+  },
+  "devDependencies": {
+    "concurrently": "^8.2.2"
+  },
+  "keywords": ["codeforces", "tracker", "react", "nodejs"],
+  "author": "",
+  "license": "ISC"
+} 

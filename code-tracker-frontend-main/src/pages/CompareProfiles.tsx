@@ -349,7 +349,7 @@ const CompareProfiles: React.FC = () => {
                 </div>
                 <div className="p-4 bg-black/40 rounded border border-blue-400/20">
                   <p className="text-sm text-blue-200">Total Contests</p>
-                  <p className="text-xl font-bold">{data.stats.totalContests}</p>
+                  <p className="text-xl font-bold" style={{ color: getRatingColor(data.user.rating) }}>{data.stats.totalContests}</p>
                   <p className="font-semibold" style={{ color: getRatingColor(data.user.rating) }}>
                     #{data.user.rank}
                   </p>
@@ -362,15 +362,15 @@ const CompareProfiles: React.FC = () => {
                 </div>
                 <div className="p-4 bg-black/40 rounded border border-blue-400/20">
                   <p className="text-sm text-blue-200">Problems Solved</p>
-                  <p className="text-xl font-bold">{data.stats.totalProblems}</p>
+                  <p className="text-xl font-bold" style={{ color: getRatingColor(data.user.rating) }}>{data.stats.totalProblems}</p>
                 </div>
                 <div className="p-4 bg-black/40 rounded border border-blue-400/20">
                   <p className="text-sm text-blue-200">Acceptance Rate</p>
-                  <p className="text-xl font-bold">{data.stats.acceptanceRate}%</p>
+                  <p className="text-xl font-bold" style={{ color: getRatingColor(data.user.rating) }}>{data.stats.acceptanceRate}%</p>
                 </div>
                 <div className="p-4 bg-black/40 rounded border border-blue-400/20">
                   <p className="text-sm text-blue-200">Avg. Problems/Day (45d)</p>
-                  <p className="text-xl font-bold">{data.stats.recentAverage}</p>
+                  <p className="text-xl font-bold" style={{ color: getRatingColor(data.user.rating) }}>{data.stats.recentAverage}</p>
                 </div>
                 <div className="p-4 bg-black/40 rounded border border-blue-400/20">
                   <p className="text-sm text-blue-200">Last Contest</p>
